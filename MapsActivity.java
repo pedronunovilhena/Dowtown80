@@ -2,6 +2,7 @@ package com.example.pedronunovilhena.dowtown80;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,7 +32,33 @@ public class MapsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_maps);
         setUpMapIfNeeded();
+    }
 
+
+    public void showMenu( View v){
+        Toast.makeText(getApplicationContext(), "Nothing to do yet.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, Main_Menu.class);
+        startActivity(intent);
+    }
+
+
+    public void onClick(View v) {
+
+
+
+
+        if (v.getId() == R.id.menuBtn)
+            Toast.makeText(getApplicationContext(), "Nothing to do yet.", Toast.LENGTH_SHORT).show();
+        /* i=new Intent(this, MainMenu.class);
+
+        startActivity(i);
+        closeThisActivity();*/
+
+    }
+
+    private void closeThisActivity(){
+        finish();
+        System.exit(0);
     }
 
     @Override
@@ -76,7 +104,7 @@ public class MapsActivity extends FragmentActivity {
                 // Called when a new location is found by the network location provider.
                 //makeUseOfNewLocation(location);
                 LatLng latLng = new LatLng(location.getLatitude() , location.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(latLng).title("Marker"));
+                mMap.addMarker(new MarkerOptions().position(latLng).title("Your loc."));
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
 
             }
@@ -95,9 +123,12 @@ public class MapsActivity extends FragmentActivity {
 
     public void onZoom(View view)
     {
+
         if(view.getId() == R.id.Bzoomin)
         {
             mMap.animateCamera(CameraUpdateFactory.zoomIn());
+
+
         }
         if(view.getId() == R.id.Bzoomout)
         {
