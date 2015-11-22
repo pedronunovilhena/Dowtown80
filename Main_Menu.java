@@ -26,8 +26,13 @@ public class Main_Menu extends Activity {
 
     public void showRules (View v){
         Toast.makeText(getApplicationContext(), "Nothing to do yet.", Toast.LENGTH_SHORT).show();
+
     }
 
+    public void playGame(View v){
+        Intent intent=new Intent(this,Etapa_0.class);
+        startActivity(intent);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
