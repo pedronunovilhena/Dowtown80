@@ -18,8 +18,8 @@ public class Main_Menu extends Activity {
     }
 
 
+
     public void playQuizz( View v){
-        Toast.makeText(getApplicationContext(), "Nothing to do yet.", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, Quizz.class);
         startActivity(intent);
     }

@@ -1,8 +1,10 @@
 package com.example.pedronunovilhena.dowtown80;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,12 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class Etapa_0 extends ActionBarActivity {
+public class Etapa_0 extends AppCompatActivity {
     public int etapa_nr=1;
+
+    private Toolbar toolbar;
+
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
                 setContentView(R.layout.activity_etapa_0);
+
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -69,6 +76,15 @@ public class Etapa_0 extends ActionBarActivity {
 
     }
 
+    public void showMap(View v){
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+    public void showHelp (View v){
+        Toast.makeText(getApplicationContext(), "Nothing to do yet.", Toast.LENGTH_SHORT).show();
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

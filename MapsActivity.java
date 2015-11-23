@@ -45,8 +45,6 @@ public class MapsActivity extends FragmentActivity {
     public void onClick(View v) {
 
 
-
-
         if (v.getId() == R.id.menuBtn)
             Toast.makeText(getApplicationContext(), "Nothing to do yet.", Toast.LENGTH_SHORT).show();
         /* i=new Intent(this, MainMenu.class);
