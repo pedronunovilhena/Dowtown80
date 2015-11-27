@@ -60,7 +60,7 @@ public class Quizz extends FragmentActivity {
                     break;
             }
         }
-        else if(answer==2) {
+        else if(answer==2) {//
             switch (player_number) {
                 case 1:
                     Player2.Fix++;

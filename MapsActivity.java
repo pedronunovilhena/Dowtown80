@@ -26,14 +26,20 @@ import java.util.List;
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    public String actor;
+    public int etapa_nr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView( R.layout.activity_maps);
+        Intent intent = getIntent();
+        actor = intent.getStringExtra("actor");
+        etapa_nr = intent.getIntExtra("etapa_nr",3);
+        //Toast.makeText(getApplicationContext(), "Actor:"+actor+"__etapa nr:"+etapa_nr, Toast.LENGTH_SHORT).show();
         setUpMapIfNeeded();
-    }
 
+    }
 
     public void showMenu( View v){
         Toast.makeText(getApplicationContext(), "Nothing to do yet.", Toast.LENGTH_SHORT).show();
@@ -41,18 +47,6 @@ public class MapsActivity extends FragmentActivity {
         startActivity(intent);
     }
 
-
-    public void onClick(View v) {
-
-
-        if (v.getId() == R.id.menuBtn)
-            Toast.makeText(getApplicationContext(), "Nothing to do yet.", Toast.LENGTH_SHORT).show();
-        /* i=new Intent(this, MainMenu.class);
-
-        startActivity(i);
-        closeThisActivity();*/
-
-    }
 
     private void closeThisActivity(){
         finish();
@@ -63,9 +57,29 @@ public class MapsActivity extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
-        getActualLoc();
+        getMissionLoc();
+        getAtualLoc();
     }
 
+
+    public void getMissionLoc(){
+        if(actor.equalsIgnoreCase("Fixx") && (etapa_nr==1)){
+
+            LatLng reitoria = new LatLng(41.1466882, -8.6239753); // reitoria por enquanto
+            mMap.addMarker(new MarkerOptions().position(reitoria).title("Marker").snippet("Reitoria"));
+        }
+        if(actor.equalsIgnoreCase("Fixx") && (etapa_nr==2)){
+
+            LatLng porto = new LatLng(41.1785734, -8.5962233); // FEUP
+            mMap.addMarker(new MarkerOptions().position(porto).title("Marker").snippet("Best faculty"));
+        }
+        if(actor.equalsIgnoreCase("Fixx") && (etapa_nr==3)){
+
+            LatLng porto = new LatLng(41.1608, -8.5819); // Estádio do Dragãoo
+            mMap.addMarker(new MarkerOptions().position(porto).title("Best(?) Stadium"));
+        }
+
+    }
 
     public void onSearch(View view)
     {
@@ -92,7 +106,7 @@ public class MapsActivity extends FragmentActivity {
     }
 
 
-    public void getActualLoc(){
+    public void getAtualLoc(){
         // Acquire a reference to the system Location Manager
         LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
@@ -102,7 +116,7 @@ public class MapsActivity extends FragmentActivity {
                 // Called when a new location is found by the network location provider.
                 //makeUseOfNewLocation(location);
                 LatLng latLng = new LatLng(location.getLatitude() , location.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(latLng).title("Your loc."));
+                mMap.addMarker(new MarkerOptions().position(latLng).title("Your loc.").snippet("Your Loc."));
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
 
             }
@@ -115,7 +129,8 @@ public class MapsActivity extends FragmentActivity {
         };
 
 // Register the listener with the Location Manager to receive location updates
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 3, 0, locationListener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10, 0, locationListener);
+
     }
 
 
@@ -146,6 +161,7 @@ public class MapsActivity extends FragmentActivity {
 
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
+        getAtualLoc();
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
@@ -158,57 +174,10 @@ public class MapsActivity extends FragmentActivity {
     }
 
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        getAtualLoc();
+        getMissionLoc();
         mMap.setMyLocationEnabled(true);
-
 
     }
 }
-
-/*
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
-
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Play"
-            android:id="@+id/playBtn"
-            android:layout_weight="0.10" />
-
-        <Button
-            android:layout_width="629dp"
-            android:layout_height="wrap_content"
-            android:text="Rules"
-            android:id="@+id/rulesBtn"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.14" />
-
-
-
-</LinearLayout>
- */
-
-/*
-package com.example.pedronunovilhena.mapa_1;
-
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-
-
-public class SplashActivity extends FragmentActivity {
-
-    protected void onCreate(Bundle savedInstanceState) {
-       /* super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome);
-
-        Button playBtn = (Button) findViewById(R.id.playBtn);
-        playBtn.setOnClickListener((android.view.View.OnClickListener) playBtn);
-        Button rulesBtn = (Button) findViewById(R.id.rulesBtn);
-        rulesBtn.setOnClickListener((android.view.View.OnClickListener) rulesBtn);     }}*/
-
 

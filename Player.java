@@ -11,6 +11,6 @@ public class Player {
     public Player() {
         Fogg=0;
         Fix=0;
-        Passepartout=0;
+        Passepartout=0;//
     }
 }

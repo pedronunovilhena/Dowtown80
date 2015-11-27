@@ -15,7 +15,7 @@ public class MainMenu extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome);
 
-     /*   //////////////////////////////////////////////////////////////////////
+     /*   ////////////////////////////////////////////////////////////////////
         //////// GAME MENU  /////////////////////////////////////////////////
         Button playBtn = (Button) findViewById(R.id.playBtn);
         playBtn.setOnClickListener(this);

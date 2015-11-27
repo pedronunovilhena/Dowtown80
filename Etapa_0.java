@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 public class Etapa_0 extends AppCompatActivity {
     public int etapa_nr=1;
+    public String actor="Fixx";
 
     private Toolbar toolbar;
 
@@ -78,7 +79,10 @@ public class Etapa_0 extends AppCompatActivity {
 
     public void showMap(View v){
         Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("actor",actor);
+        intent.putExtra("etapa_nr",etapa_nr);
         startActivity(intent);
+
     }
 
     public void showHelp (View v){

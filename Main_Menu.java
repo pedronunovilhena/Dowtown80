@@ -21,7 +21,7 @@ public class Main_Menu extends Activity {
 
     public void playQuizz( View v){
         Intent intent = new Intent(this, Quizz.class);
-        startActivity(intent);
+        startActivity(intent);//
     }
 
     public void showRules (View v){
